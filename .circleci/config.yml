@@ -2,6 +2,7 @@ version: 2
 
 jobs:
   build:
+    context: Global
     machine: true
     working_directory: ~/python-flask-docker-hello-world
     steps:
