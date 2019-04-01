@@ -1,0 +1,41 @@
+version: 2
+
+jobs:
+  build:
+    machine: true
+    working_directory: ~/python-flask-docker-hello-world
+    steps:
+      - checkout
+      - run:
+          name: Login to Docker
+          command: echo $DOCKER_PWD | docker login -u $DOCKER_LOGIN --password-stdin
+      - run:
+          name: Build Hello
+          command: docker build -t flask-hello hello/
+      - run:
+          name: Build World
+          command: docker build -t flask-world world/
+      - run:
+          name: Tag Hello image
+          command: docker tag flask-hello deepakputhraya/python-hello:${CIRCLE_TAG}
+      - run:
+          name: Tag World image
+          command: docker tag flask-world deepakputhraya/python-world:${CIRCLE_TAG}
+      - run:
+          name: Push Hello Image
+          command: docker push deepakputhraya/python-hello
+      - run:
+          name: Push World Image
+          command: docker push deepakputhraya/python-world
+
+workflows:
+  version: 2
+  migrations-build:
+    jobs:
+      - build:
+          filters:
+              tags:
+                  only: /v.*/
+              branches:
+                  ignore: /.*/
+
