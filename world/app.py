@@ -10,7 +10,7 @@ def world():
 
 @app.route("/version")
 def version():
-    return jsonify({"version": "v1.0"})
+    return jsonify({"version": "v2.0"})
 
 
 if __name__ == "__main__":
