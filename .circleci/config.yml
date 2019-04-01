@@ -2,7 +2,6 @@ version: 2
 
 jobs:
   build:
-    context: Global
     machine: true
     working_directory: ~/python-flask-docker-hello-world
     steps:
@@ -34,6 +33,7 @@ workflows:
   migrations-build:
     jobs:
       - build:
+          context: Global
           filters:
               tags:
                   only: /v.*/
