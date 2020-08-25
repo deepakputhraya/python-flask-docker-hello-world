@@ -11,7 +11,7 @@ def hello():
 
 @app.route("/version")
 def version():
-    return jsonify({"version": "v3.0"})
+    return jsonify({"version": "v0.0"})
 
 
 if __name__ == "__main__":
